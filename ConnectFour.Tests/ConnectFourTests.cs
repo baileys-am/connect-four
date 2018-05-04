@@ -4,11 +4,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-namespace ConnectFour.Tests
+namespace ConnectFourTests
 {
-    [TestClass]
     public class ConnectFourTests
     {
         /* 
@@ -20,31 +19,28 @@ namespace ConnectFour.Tests
          * [X] Reset game
          */
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void IndicatesGameHasStartedAfterFirstPlay()
         {
             var game = new ConnectFour();
 
-            Assert.IsFalse(game.HasStarted);
+            Assert.False(game.HasStarted);
             game.Play(Column.Column1);
-            Assert.IsTrue(game.HasStarted);
+            Assert.True(game.HasStarted);
         }
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void IndicatesGameHasNotStartedAfterReset()
         {
             var game = new ConnectFour();
 
             game.Play(Column.Column1);
-            Assert.IsTrue(game.HasStarted);
+            Assert.True(game.HasStarted);
             game.Reset();
-            Assert.IsFalse(game.HasStarted);
+            Assert.False(game.HasStarted);
         }
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void FilledColumnCanBePlayedAfterReset()
         {
             Column playerRequestedColumn = Column.Column1;
@@ -56,7 +52,7 @@ namespace ConnectFour.Tests
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
-            Assert.ThrowsException<InvalidMoveException>(() => game.Play(playerRequestedColumn));
+            Assert.Throws<InvalidMoveException>(() => game.Play(playerRequestedColumn));
 
             game.Reset();
 
@@ -66,11 +62,10 @@ namespace ConnectFour.Tests
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
-            Assert.ThrowsException<InvalidMoveException>(() => game.Play(playerRequestedColumn));
+            Assert.Throws<InvalidMoveException>(() => game.Play(playerRequestedColumn));
         }
 
-        [TestMethod]
-        [TestCategory("Play column")]
+        [Fact]
         public void CurrentPlayerRotatesAfterEachPlay()
         {
             var game = new ConnectFour();
@@ -78,13 +73,12 @@ namespace ConnectFour.Tests
             Player[] expectedPlayer = new Player[] { Player.Player1, Player.Player2, Player.Player1, Player.Player2 };
             for (int i = 0; i < expectedPlayer.Length; i++)
             {
-                Assert.AreEqual(expectedPlayer[i], game.CurrentPlayer);
+                Assert.Equal(expectedPlayer[i], game.CurrentPlayer);
                 game.Play(Column.Column1);
             }
         }
 
-        [TestMethod]
-        [TestCategory("Play column")]
+        [Fact]
         public void ColumnCanOnlyBePlayedSixTimes()
         {
             Column playerRequestedColumn = Column.Column1;
@@ -96,11 +90,10 @@ namespace ConnectFour.Tests
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
-            Assert.ThrowsException<InvalidMoveException>(() => game.Play(playerRequestedColumn));
+            Assert.Throws<InvalidMoveException>(() => game.Play(playerRequestedColumn));
         }
 
-        [TestMethod]
-        [TestCategory("Play column")]
+        [Fact]
         public void PlayerWinsIfFourInARowOnColumn()
         {
             Column player1Column = Column.Column1;
@@ -118,12 +111,11 @@ namespace ConnectFour.Tests
 
             bool gameOver = game.IsGameOver(out Player winner);
 
-            Assert.IsTrue(gameOver);
-            Assert.AreEqual(Player.Player2, winner);
+            Assert.True(gameOver);
+            Assert.Equal(Player.Player2, winner);
         }
 
-        [TestMethod]
-        [TestCategory("Play column")]
+        [Fact]
         public void PlayerWinsIfFourInARowOnRow()
         {
             var game = new ConnectFour();
@@ -138,12 +130,11 @@ namespace ConnectFour.Tests
 
             bool gameOver = game.IsGameOver(out Player winner);
 
-            Assert.IsTrue(gameOver);
-            Assert.AreEqual(Player.Player1, winner);
+            Assert.True(gameOver);
+            Assert.Equal(Player.Player1, winner);
         }
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void GameIsNotOverWhenColumnHasTwoP1EntriesThenTwoP2Entries()
         {
             var game = new ConnectFour();
@@ -157,11 +148,10 @@ namespace ConnectFour.Tests
             game.Play(Column.Column2);
             game.Play(Column.Column1);
 
-            Assert.IsFalse(game.IsGameOver(out Player winner));
+            Assert.False(game.IsGameOver(out Player winner));
         }
 
-        [TestMethod]
-        [TestCategory("Play column")]
+        [Fact]
         public void PlayerWinsIfFourDiagonal()
         {
             var game = new ConnectFour();
@@ -183,12 +173,11 @@ namespace ConnectFour.Tests
 
             bool gameOver = game.IsGameOver(out Player winner);
 
-            Assert.IsTrue(gameOver);
-            Assert.AreEqual(Player.Player1, winner);
+            Assert.True(gameOver);
+            Assert.Equal(Player.Player1, winner);
         }
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void PlayerCannotPlayAfterGameIsOver()
         {
             Column player1Column = Column.Column1;
@@ -204,11 +193,10 @@ namespace ConnectFour.Tests
             game.Play(player1Column + 1); // Player 1 makes mistake
             game.Play(player2Column);     // Player 2 wins
 
-            Assert.ThrowsException<GameOverException>(() => game.Play(player1Column));
+            Assert.Throws<GameOverException>(() => game.Play(player1Column));
         }
 
-        [TestMethod]
-        [TestCategory("Game state")]
+        [Fact]
         public void BoardDrawingShowsP1AndP2Plays()
         {
             string expectedBoard = String.Join(Environment.NewLine,
@@ -226,7 +214,7 @@ namespace ConnectFour.Tests
             game.Play(Column.Column6);
 
             var board = game.DrawBoard();
-            Assert.AreEqual(expectedBoard, board);
+            Assert.Equal(expectedBoard, board);
         }
     }
 }
