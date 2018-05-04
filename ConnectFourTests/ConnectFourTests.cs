@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using ConnectFour;
 
 namespace ConnectFourTests
 {
@@ -22,7 +23,7 @@ namespace ConnectFourTests
         [Fact]
         public void IndicatesGameHasStartedAfterFirstPlay()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             Assert.False(game.HasStarted);
             game.Play(Column.Column1);
@@ -32,7 +33,7 @@ namespace ConnectFourTests
         [Fact]
         public void IndicatesGameHasNotStartedAfterReset()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(Column.Column1);
             Assert.True(game.HasStarted);
@@ -44,7 +45,7 @@ namespace ConnectFourTests
         public void FilledColumnCanBePlayedAfterReset()
         {
             Column playerRequestedColumn = Column.Column1;
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
@@ -68,7 +69,7 @@ namespace ConnectFourTests
         [Fact]
         public void CurrentPlayerRotatesAfterEachPlay()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             Player[] expectedPlayer = new Player[] { Player.Player1, Player.Player2, Player.Player1, Player.Player2 };
             for (int i = 0; i < expectedPlayer.Length; i++)
@@ -82,7 +83,7 @@ namespace ConnectFourTests
         public void ColumnCanOnlyBePlayedSixTimes()
         {
             Column playerRequestedColumn = Column.Column1;
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(playerRequestedColumn);
             game.Play(playerRequestedColumn);
@@ -98,7 +99,7 @@ namespace ConnectFourTests
         {
             Column player1Column = Column.Column1;
             Column player2Column = Column.Column7;
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(player1Column);
             game.Play(player2Column);
@@ -118,7 +119,7 @@ namespace ConnectFourTests
         [Fact]
         public void PlayerWinsIfFourInARowOnRow()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(Column.Column1);
             game.Play(Column.Column1);
@@ -137,7 +138,7 @@ namespace ConnectFourTests
         [Fact]
         public void GameIsNotOverWhenColumnHasTwoP1EntriesThenTwoP2Entries()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(Column.Column1);
             game.Play(Column.Column2);
@@ -154,7 +155,7 @@ namespace ConnectFourTests
         [Fact]
         public void PlayerWinsIfFourDiagonal()
         {
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(Column.Column1);
 
@@ -182,7 +183,7 @@ namespace ConnectFourTests
         {
             Column player1Column = Column.Column1;
             Column player2Column = Column.Column7;
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
 
             game.Play(player1Column);
             game.Play(player2Column);
@@ -208,7 +209,7 @@ namespace ConnectFourTests
                                                "[(1)][   ][   ][   ][   ][(1)][(2)]"
                                               );
 
-            var game = new ConnectFour();
+            var game = new ConnectFour.ConnectFour();
             game.Play(Column.Column1);
             game.Play(Column.Column7);
             game.Play(Column.Column6);

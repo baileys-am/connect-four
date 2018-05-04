@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFour", "ConnectFour\ConnectFour.csproj", "{995E36DC-E4F4-4D35-B9E6-8F4011A22C8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFour.Tests", "ConnectFourTests\ConnectFour.Tests.csproj", "{C56515EC-F678-479E-87F0-1B20B1753BD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFourTests", "ConnectFourTests\ConnectFourTests.csproj", "{C56515EC-F678-479E-87F0-1B20B1753BD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectFourConsole", "ConnectFourConsole\ConnectFourConsole.csproj", "{F6B1650D-FC8A-4694-9234-BFE94328B4C3}"
 EndProject
