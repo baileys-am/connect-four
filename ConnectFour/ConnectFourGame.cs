@@ -30,7 +30,7 @@ namespace ConnectFour
         Player2
     }
 
-    public class ConnectFour
+    public class ConnectFourGame
     {
         private readonly Board _board = new Board();
 
