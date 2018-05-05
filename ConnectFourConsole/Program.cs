@@ -9,7 +9,7 @@ namespace ConnectFour
 {
     class Program
     {
-        private static readonly ConnectFour _game = new ConnectFour();
+        private static readonly ConnectFourGame _game = new ConnectFourGame();
 
         static void Main(string[] args)
         {
